@@ -35,13 +35,10 @@ describe('testing /api/lists', () => {
   })
 
   describe('testing GET /api/lists', () => {
-    beforeEach(() => {
-      mockList()
-      .then(list => tempList = list);
-    })
 
     it('should return a list', () => {
-      return superagent.get(`${API_URL}/api/lists`)
+      mockList()
+      .then(list => superagent.get(`${API_URL}/api/lists/${list._id}`))
       .then( res => {
         expect(true).toBe(true);
       })
