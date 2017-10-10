@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const errorMiddleware = require('./error-middleware.js');
 
 mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGODB_URI)
@@ -12,6 +13,7 @@ const app = express();
 
 app.use(cors());
 app.use(morgan('dev'));
+app.use(errorMiddleWare);
 
 const server = module.exports = {};
 server.isOn = false;
