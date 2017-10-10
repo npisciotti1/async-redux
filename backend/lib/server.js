@@ -11,8 +11,16 @@ mongoose.connect(process.env.MONGODB_URI)
 
 const app = express();
 
+//middleware
 app.use(cors());
 app.use(morgan('dev'));
+
+//add 404 to all routes
+app.all('/api/*', (req, res, next) =>{
+  res.sendStatus(404)
+})
+
+//error middleware, loaded last
 app.use(errorMiddleWare);
 
 const server = module.exports = {};
