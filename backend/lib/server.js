@@ -4,7 +4,6 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const errorMiddleware = require('./error-middleware.js');
 
 mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGODB_URI)
@@ -16,12 +15,13 @@ app.use(cors());
 app.use(morgan('dev'));
 
 //add 404 to all routes
-app.all('/api/*', (req, res, next) =>{
-  res.sendStatus(404)
-})
+// app.all('/api/*', (req, res, next) => res.sendStatus(404))
+
+//load routes
+app.use(require('../route/list-router.js'))
 
 //error middleware, loaded last
-app.use(errorMiddleware);
+app.use(require('./error-middleware.js'));
 
 const server = module.exports = {};
 server.isOn = false;
