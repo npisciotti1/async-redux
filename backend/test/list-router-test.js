@@ -1,6 +1,28 @@
+'use strict';
+
+const faker = require('faker');
+const expect = require('expect');
+const superagent = require('superagent');
+
+const server = require('../lib/server.js');
+
+const API_URL = process.env.API_URL;
 const tempList;
+
 
 describe('testing /api/lists', () => {
   before(server.start)
   after(server.stop)
+
+  describe('testing POST /api/lists', () => {
+    let data = {title: faker.name.title()}
+    it('should respond with the new list', () => {
+      return superagent.post(`${API_URL}/api/lists`)
+      .send(data)
+      .then( res => {
+        expect(res.status).toEqual(200);
+        expect(res.body.title).toEqual(data.title)
+      })
+    })
+  })
 })
