@@ -21,7 +21,9 @@ describe('testing /api/lists', () => {
       .send(data)
       .then( res => {
         expect(res.status).toEqual(200);
-        expect(res.body.title).toEqual(data.title)
+        expect(res.body.title).toEqual(data.title);
+        expect(res.body.tasks).toEqual([]);
+        expect(res.body._id).toExist()
       })
     })
   })
