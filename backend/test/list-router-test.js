@@ -8,9 +8,10 @@ require('dotenv').config();
 
 const server = require('../lib/server.js');
 const clearDB = require('../lib/clear-db.js');
+const mockList = require('../lib/mock-list.js');
 
-const API_URL = process.env.API_URL;
 let tempList;
+const API_URL = process.env.API_URL;
 
 
 describe('testing /api/lists', () => {
@@ -29,6 +30,20 @@ describe('testing /api/lists', () => {
         expect(res.body.tasks).toEqual([]);
         // expect(res.body._id).toExist()
         console.log(res.body);
+      })
+    })
+  })
+
+  describe('testing GET /api/lists', () => {
+    beforeEach(() => {
+      mockList()
+      .then(list => tempList = list);
+    })
+
+    it('should return a list', () => {
+      return superagent.get(`${API_URL}/api/lists`)
+      .then( res => {
+        expect(true).toBe(true);
       })
     })
   })
