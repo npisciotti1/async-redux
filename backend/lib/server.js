@@ -21,7 +21,7 @@ app.all('/api/*', (req, res, next) =>{
 })
 
 //error middleware, loaded last
-app.use(errorMiddleWare);
+app.use(errorMiddleware);
 
 const server = module.exports = {};
 server.isOn = false;
