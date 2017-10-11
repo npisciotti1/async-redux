@@ -7,7 +7,7 @@ const superagent = require('superagent');
 require('dotenv').config();
 
 const server = require('../lib/server.js');
-// const clearDB = require('./lib/clear-db.js');
+const clearDB = require('./lib/clear-db.js');
 const mockList = require('./lib/mock-list.js');
 
 const API_URL = process.env.API_URL;
@@ -16,7 +16,7 @@ const API_URL = process.env.API_URL;
 describe('testing /api/lists', () => {
   before(server.start);
   after(server.stop);
-  // afterEach(clearDB);
+  afterEach(clearDB);
 
   describe('testing POST /api/lists', () => {
     let data = {title: faker.name.title()}
