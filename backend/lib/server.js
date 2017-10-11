@@ -27,7 +27,7 @@ const server = module.exports = {};
 server.isOn = false;
 
 server.start = () => {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     if(!server.isOn) {
       return server.http = app.listen(process.env.PORT, () => {
         server.isOn = true;
@@ -40,7 +40,7 @@ server.start = () => {
 }
 
 server.stop = () => {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     if(server.isOn && server.http) {
       return server.http.close(() => {
         server.isOn = false;
