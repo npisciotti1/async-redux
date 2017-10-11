@@ -12,3 +12,12 @@ listRouter.post('/api/lists', jsonParser, (req, res, next) => {
   .then(list => res.json(list))
   .catch(next)
 })
+
+listRouter.get('/api/lists/:id', (req, res, next) => {
+  console.log(' hit /api/lists/:id');
+
+  List.findById(req.params.id)
+  .populate('tasks')
+  .then(list => res.json(list))
+  .catch(next)
+})
