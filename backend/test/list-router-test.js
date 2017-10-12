@@ -51,19 +51,35 @@ describe('testing /api/lists', () => {
   describe('testing GET /api/lists', () => {
     let tempListArray;
     it('should return an array with max of 50 lists', () => {
-      return mockList.createMany(100)
+      return mockList.createMany(150)
       .then(listArray => {
         tempListArray = listArray;
-        return superagent.get(`${API_URL}/api/lists`)
+        return superagent.get(`${API_URL}/api/lists?page=2`)
       })
       .then( res => {
         expect(res.status).toEqual(200);
         expect(res.body.length).toEqual(50);
         res.body.forEach(list => {
+          console.log(list.title);
           expect(list).toHaveProperty('title');
           expect(list).toHaveProperty('_id');
           expect(list.tasks).toEqual([]);
         })
+      })
+    })
+  })
+
+  describe('testing GET /api/lists', () => {
+    let tempListArray;
+    it('should return an empty array since there isnt a third page', () => {
+      return mockList.createMany(100)
+      .then(listArray => {
+        tempListArray = listArray;
+        return superagent.get(`${API_URL}/api/lists?page=3`)
+      })
+      .then( res => {
+        expect(res.status).toEqual(200);
+        expect(res.body.length).toEqual(0);
       })
     })
   })
