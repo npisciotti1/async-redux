@@ -32,7 +32,7 @@ describe('testing /api/lists', () => {
     })
   })
 
-  describe('testing GET /api/lists', () => {
+  describe('testing GET /api/lists/:id', () => {
     let tempList;
     it('should return a list', () => {
       return mockList.createOne()
@@ -44,6 +44,21 @@ describe('testing /api/lists', () => {
         expect(res.status).toEqual(200);
         expect(res.body.title).toEqual(tempList.title);
         expect(res.body.tasks).toEqual([]);
+      })
+    })
+  })
+
+  describe('testing GET /api/lists', () => {
+    let tempListArray;
+    it('should return an array with max of 50 lists', () => {
+      return mockList.createMany(100)
+      .then(listArray => {
+        tempListArray = listArray;
+        return superagent.get(`${API_URL}/api/lists`)
+      })
+      .then( res => {
+        expect(res.status).toEqual(200);
+        expect(res.body.length).toEqual(50);
       })
     })
   })
