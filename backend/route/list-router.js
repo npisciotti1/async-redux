@@ -28,6 +28,7 @@ listRouter.get('/api/lists', (req, res, next) => {
   let pageNumber = Number(req.query.page);
 
   if(!pageNumber || pageNumber < 1) pageNumber = 1;
+  pageNumber--;
 
   List.find({})
   .sort({title: 'asc'})
