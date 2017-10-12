@@ -26,6 +26,7 @@ listRouter.get('/api/lists', (req, res, next) => {
   console.log('GET /api/lists');
 
   List.find({})
+  .sort({title: 'asc'})
   .limit(50)
   .then(lists => res.json(lists))
   .catch(next);
