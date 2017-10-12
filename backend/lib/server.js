@@ -48,6 +48,6 @@ server.stop = () => {
         resolve()
       })
     }
-    reject(new Error('ther server is not running'))
+    reject(new Error('the server is not running'))
   })
 }
