@@ -41,13 +41,13 @@ server.start = () => {
 
 server.stop = () => {
   return new Promise((resolve, reject) => {
-    if(server.isOn && server.http) {
+    if(server.http && server.isOn){
       return server.http.close(() => {
-        server.isOn = false;
-        console.log('server closed')
+        server.isOn = false
+        console.log('server down')
         resolve()
       })
     }
-    reject(new Error('server isn\'t on'))
+    reject(new Error('ther server is not running'))
   })
 }
