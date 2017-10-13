@@ -24,5 +24,15 @@ mockTask.createOne = () => {
 }
 
 mockTask.createMany = (n) => {
-
+  let result = {};
+  mockList.createOne()
+  .then( list => {
+    result.list = list;
+    let taskArray = new Array(n)
+      .fill(0).map( () => { new Task({
+        content: faker.random.words(10),
+        listID: list._id.toString()
+        }).save()
+      })
+  })
 }
