@@ -16,15 +16,25 @@ taskSchema.pre('save', function(next) {
   .catch( () => next(new Error('failed to create note - list does not exist')))
 })
 
-task.Schema.post('save', function(doc, next) {
+taskSchema.post('save', function(doc, next) {
   List.findById(doc.listID)
   .then( list => {
     list.tasks.push(doc._id);
     return list.save();
   })
   .then( () => next())
-  .catch( () => next(new Error('failed to update List with new task id')))
+  .catch(next)
 
+})
+
+taskSchema.post('remove', function(doc) {
+  List.findById(doc.listID)
+  .then(list => {
+    list.tasks = list.tasks.filter(task => task._id !== doc._id)
+    return list.save()
+  })
+  .then( () => next())
+  .catch(next)
 })
 
 module.exports = mongoose.model('task', taskSchema);
