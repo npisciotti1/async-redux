@@ -36,4 +36,8 @@ mockTask.createMany = (n) => {
       })
     return Promise.all([taskArrayPromises])
   })
+  .then( tasks => {
+    result.tasks = tasks;
+    return result;
+  })
 }
