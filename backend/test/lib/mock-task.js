@@ -28,11 +28,12 @@ mockTask.createMany = (n) => {
   mockList.createOne()
   .then( list => {
     result.list = list;
-    let taskArray = new Array(n)
+    let taskArrayPromises = new Array(n)
       .fill(0).map( () => { new Task({
         content: faker.random.words(10),
         listID: list._id.toString()
         }).save()
       })
+    return Promise.all([taskArrayPromises])
   })
 }
