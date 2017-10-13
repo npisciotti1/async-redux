@@ -16,4 +16,15 @@ taskSchema.pre('save', function(next) {
   .catch( () => next(new Error('failed to create note - list does not exist')))
 })
 
+task.Schema.post('save', function(doc, next) {
+  List.findById(doc.listID)
+  .then( list => {
+    list.tasks.push(doc._id);
+    return list.save();
+  })
+  .then( () => next())
+  .catch( () => next(new Error('failed to update List with new task id')))
+
+})
+
 module.exports = mongoose.model('task', taskSchema);
