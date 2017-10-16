@@ -17,4 +17,22 @@ describe('testing /api/tasks', () => {
   before(server.start)
   after(server.stop);
   afterEach(clearDB);
+
+  describe('POST /api/tasks', () => {
+    it('should create and return a task', () => {
+      mockList.createOne()
+      .then(list => {
+        return superagent.post(`${API_URL}/api/tasks`)
+        .send({
+          content: 'hello world',
+          list: list._id.toString();
+        })
+      })
+      .then(res => {
+        expect(res.status).toEqual(200);
+        expect(res.body.content).toEqual('hello world');
+        expect(res.body).toHaveProperty('listID');
+      })
+    })
+  })
 })
