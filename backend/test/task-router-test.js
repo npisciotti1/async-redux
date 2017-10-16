@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').config({path: `${__dirname}/../../.env`})
+require('dotenv').config()
 
 const expect = require('expect');
 const superagent = require('superagent');
@@ -25,7 +25,7 @@ describe('testing /api/tasks', () => {
         return superagent.post(`${API_URL}/api/tasks`)
         .send({
           content: 'hello world',
-          list: list._id.toString();
+          listID: list._id.toString(),
         })
       })
       .then(res => {

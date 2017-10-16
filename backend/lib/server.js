@@ -14,11 +14,12 @@ const app = express();
 app.use(cors());
 app.use(morgan('dev'));
 
-//add 404 to all routes
-// app.all('/api/*', (req, res, next) => res.sendStatus(404))
-
 //load routes
 app.use(require('../route/list-router.js'))
+app.use(require('../route/task-router.js'))
+
+//add 404 to all routes
+app.all('/api/*', (req, res, next) => res.sendStatus(404))
 
 //error middleware, loaded last
 app.use(require('./error-middleware.js'));

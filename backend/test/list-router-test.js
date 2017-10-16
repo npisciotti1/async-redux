@@ -60,7 +60,6 @@ describe('testing /api/lists', () => {
         expect(res.status).toEqual(200);
         expect(res.body.length).toEqual(50);
         res.body.forEach(list => {
-          console.log(list.title);
           expect(list).toHaveProperty('title');
           expect(list).toHaveProperty('_id');
           expect(list.tasks).toEqual([]);

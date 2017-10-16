@@ -27,6 +27,7 @@ listRouter.get('/api/lists', (req, res, next) => {
 
   let pageNumber = Number(req.query.page);
 
+  //pagination, the decrement is for translating results to pages
   if(!pageNumber || pageNumber < 1) pageNumber = 1;
   pageNumber--;
 

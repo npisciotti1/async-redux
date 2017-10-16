@@ -19,6 +19,7 @@ taskSchema.pre('save', function(next) {
 taskSchema.post('save', function(doc, next) {
   List.findById(doc.listID)
   .then( list => {
+    console.log('did we get here?')
     list.tasks.push(doc._id);
     return list.save();
   })
