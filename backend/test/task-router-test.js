@@ -20,7 +20,7 @@ describe('testing /api/tasks', () => {
 
   describe('POST /api/tasks', () => {
     it('should create and return a task', () => {
-      mockList.createOne()
+      return mockList.createOne()
       .then(list => {
         return superagent.post(`${API_URL}/api/tasks`)
         .send({
