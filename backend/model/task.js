@@ -12,21 +12,25 @@ const taskSchema = Schema({
 
 taskSchema.pre('save', function(next) {
   List.findById(this.listID)
+  .then( list => {
+    list.tasks.push(this._id)
+    return list.save()
+  })
   .then( () => next())
   .catch( () => next(new Error('failed to create note - list does not exist')))
 })
 
-taskSchema.post('save', function(doc, next) {
-  List.findById(doc.listID)
-  .then( list => {
-    console.log('did we get here?')
-    list.tasks.push(doc._id);
-    return list.save();
-  })
-  .then( () => next())
-  .catch(next)
-
-})
+// taskSchema.post('save', function(doc, next) {
+//   List.findById(doc.listID)
+//   .then( list => {
+//     console.log('did we get here?')
+//     list.tasks.push(doc._id);
+//     return list.save();
+//   })
+//   .then( () => next())
+//   .catch(next)
+//
+// })
 
 taskSchema.post('remove', function(doc) {
   List.findById(doc.listID)
