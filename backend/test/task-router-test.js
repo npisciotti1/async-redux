@@ -21,6 +21,7 @@ describe('testing /api/tasks', () => {
 
   describe('POST /api/tasks', () => {
     let tempList;
+    let tempTask;
     it('should create and return a task', () => {
       return mockList.createOne()
       .then(list => {
@@ -35,8 +36,13 @@ describe('testing /api/tasks', () => {
         expect(res.status).toEqual(200);
         expect(res.body.content).toEqual('hello world');
         expect(res.body.listID).toEqual(tempList._id.toString());
+        tempTask = res.body;
 
-        return List.findById(tempList)
+        return List.findById(tempList._id)
+      })
+      .then( list => {
+        expect(list.tasks.length).toEqual(1);
+        expect(list.tasks[0].toString()).toEqual(tempTask._id.toString())
       })
     })
   })
