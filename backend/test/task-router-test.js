@@ -7,6 +7,7 @@ const superagent = require('superagent');
 
 const server = require('../lib/server.js');
 
+const List = require('../model/list.js');
 const mockList = require('./lib/mock-list.js');
 const mockTask = require('./lib/mock-task.js');
 const clearDB = require('./lib/clear-db.js');
@@ -19,9 +20,11 @@ describe('testing /api/tasks', () => {
   afterEach(clearDB);
 
   describe('POST /api/tasks', () => {
+    let tempList;
     it('should create and return a task', () => {
       return mockList.createOne()
       .then(list => {
+        tempList = list;
         return superagent.post(`${API_URL}/api/tasks`)
         .send({
           content: 'hello world',
@@ -31,7 +34,9 @@ describe('testing /api/tasks', () => {
       .then(res => {
         expect(res.status).toEqual(200);
         expect(res.body.content).toEqual('hello world');
-        expect(res.body).toHaveProperty('listID');
+        expect(res.body.listID).toEqual(tempList._id.toString());
+
+        return List.findById(tempList)
       })
     })
   })
