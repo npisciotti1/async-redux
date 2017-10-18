@@ -15,3 +15,9 @@
 * create app.js
 * create main.scss
 * create util.js
+
+### store (redux):
+* create app reducer
+* create middleware
+* create appStoreCreate
+* add the store to the 'App' component
