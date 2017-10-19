@@ -1,5 +1,5 @@
 let validateList = (payload) => {
-  if(!payload.title)
+  if(!payload.title || !payload.id)
     return new Error('VALIDATION_ERROR: list must have title');
 };
 
