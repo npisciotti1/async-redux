@@ -13,11 +13,11 @@ export default (state=[], action) => {
     case 'LIST_UPDATE':
       validateList(payload);
       return state.map( (item) =>
-        item.id == payload.id ? payload : item );
+        item._id == payload._id ? payload : item );
     case 'LIST_DELETE':
       validateList(payload);
       return state.filter( (item) =>
-        item.id !== payload.id );
+        item._id !== payload._id );
     default:
       return state;
   }
