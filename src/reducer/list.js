@@ -1,6 +1,6 @@
 let validateList = (payload) => {
   if(!payload.title || !payload.id)
-    return new Error('VALIDATION_ERROR: list must have title');
+    return new Error('VALIDATION_ERROR: list must have title and id');
 };
 
 export default (state=[], action) => {
