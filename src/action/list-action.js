@@ -26,3 +26,12 @@ export const listCreateRequest = (list) => (dispatch, getState) => {
     return res;
   });
 };
+
+export const listUpdateRequest = (list) => (dispatch, getState) => {
+  return superagent.put(`${__API_URL__}/api/lists/${list._id}`)
+  .send(list)
+  .then( res => {
+    dispatch(listUpdate(res.body));
+    return res;
+  });
+};
