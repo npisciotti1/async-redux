@@ -23,4 +23,13 @@ class ListForm extends React.Component {
     e.preventDefault();
     this.setState({title: e.target.value});
   }
+
+  render() {
+    return(
+      <form className="list-form" onSubmit={this.handleSubmit}>
+      </form>
+    );
+  }
 }
+
+export default ListForm;
