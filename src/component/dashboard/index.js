@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import * as listActions from '../../actions/list-actions';
+import * as listActions from '../../action/list-action';
 
 class Dashboard extends React.Component {
   render(){
