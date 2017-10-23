@@ -27,6 +27,14 @@ class ListForm extends React.Component {
   render() {
     return(
       <form className="list-form" onSubmit={this.handleSubmit}>
+        <input
+        name="title"
+        type="text"
+        placeholder='title'
+        value={this.state.title}
+        onChange={this.handleChange}
+        />
+        <button type="submit"> {this.props.buttonText} </button>
       </form>
     );
   }
