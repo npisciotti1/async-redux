@@ -3,11 +3,14 @@ import {connect} from 'react-redux';
 
 import * as listActions from '../../action/list-action';
 
+import ListForm from '../list-form';
+
 class Dashboard extends React.Component {
   render(){
     return(
       <div className="dashboard">
         <h2>Dashboard</h2>
+        <ListForm></ListForm>
       </div>
     );
   }
