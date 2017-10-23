@@ -9,7 +9,7 @@ class ListForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillRecieveProps(props) {
+  componentWillReceiveProps(props) {
     if(props.list)
       this.setState(props.list);
   }
