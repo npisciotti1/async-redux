@@ -8,4 +8,19 @@ class ListForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+
+  componentWillRecieveProps(props) {
+    if(props.list)
+      this.setState(props.list);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.onComplete(this.state);
+  }
+
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({title: e.target.value});
+  }
 }
