@@ -36,6 +36,11 @@ export const listUpdateRequest = (list) => (dispatch, getState) => {
   });
 };
 
+// export const listFetchAllRequeset = () => (dispatch, getState) => {
+//   return superagent.get(`${__API_URL__}/api/lists`)
+//   .then( res => )
+// }
+
 export const listDeleteRequest = (list) => (dispatch, getState) => {
   return superagent.delete(`${__API_URL__}/api/lists/${list._id}`)
   .then(() => dispatch(listDelete(list)));
